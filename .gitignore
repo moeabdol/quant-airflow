@@ -1,1 +1,6 @@
 .venv
+airflow.db
+airflow-webserver.pid
+logs/
+standalone_admin_password.txt
+tags
