@@ -1,0 +1,5 @@
+apache-airflow==2.6.3
+pylint==2.17.4
+pyright==1.1.318
+bandit==1.7.5
+flake8==6.0.0
