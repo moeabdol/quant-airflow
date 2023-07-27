@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+database="${DIRENV_DIR:1}/dealapp.db"
+city_ids="6009d941950ada00061eeeab 6009d942950ada00061eeeac 5dd49004af8af4002cbfae3a 5dd49004af8af4002cbfae4c 5dd49004af8af4002cbfae33 5dd49004af8af4002cbfae3b 5dd49004af8af4002cbfae38 5dd49004af8af4002cbfae32 5dd49004af8af4002cbfae3c 5dd49005af8af4002cbfbc7a 5dd49004af8af4002cbfae9e 5dd49004af8af4002cbfae6b"
+
+for city_id in $city_ids
+do
+	file="${DIRENV_DIR:1}/scripts/${city_id}_districts.csv"
+	curl https://dealapp.sa/api/district/search?cities="$city_id" | jq -r '.data[] | "\(._id),\(.name_ar),\(.name_en),\(.city),\(.region)"' >> "$file"
+	sqlite3 "$database" ".import --csv ${file} districts"
+	rm -f "$file"
+done

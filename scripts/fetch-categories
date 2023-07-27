@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+database="${DIRENV_DIR:1}/dealapp.db"
+file="${DIRENV_DIR:1}/scripts/categories.csv"
+curl https://dealapp.sa/api/property-types/categories | jq -r '.[] | "\(._id),\(.name_ar),\(.name_en)"' >> "$file"
+sqlite3 "$database" ".import --csv ${file} categories"
+rm -f "$file"
