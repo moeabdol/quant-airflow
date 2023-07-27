@@ -1,12 +1,10 @@
-include .envrc
-
 deletedb:
-	rm -f ./dealapp.db
+	rm -f "${AIRFLOW_HOME}/dealapp.db"
 
 migrateup:
-	migrate -path ./migrations -database "$(DB_DIALECT)://$(DB_NAME)?_auth_user=$(DB_USERNAME)&_auth_pass=$(DB_PASSWORD)" -verbose up
+	migrate -path "${AIRFLOW_HOME}/migrations" -database "${DB_DIALECT}://${DB_NAME}?_auth_user=${DB_USERNAME}&_auth_pass=${DB_PASSWORD}" -verbose up
 
 migratedown:
-	migrate -path ./migrations -database "$(DB_DIALECT)://$(DB_NAME)?_auth_user=$(DB_USERNAME)&_auth_pass=$(DB_PASSWORD)" -verbose down
+	migrate -path "${AIRFLOW_HOME}/migrations" -database "${DB_DIALECT}://${DB_NAME}?_auth_user=${DB_USERNAME}&_auth_pass=${DB_PASSWORD}" -verbose down
 
-.PHONY: migrateup migratedown
+.PHONY: deletedb migrateup migratedown
