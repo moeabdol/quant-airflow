@@ -72,7 +72,7 @@ cities manually and included them in the initial city table migration as INSERT
 statements.
 
 ## Fetch Property Listing AirFlow DAG
-The `fetch_listings_dag_v3` is a simple AirFlow DAG to handle all tasks related
+The `fetch_listings.py` is a simple AirFlow DAG to handle all tasks related
 to fetching city-specific data. It contains 2 main task types
 1. `SqliteOperator` task to make sure the database is cleaned before fetching of
    data
